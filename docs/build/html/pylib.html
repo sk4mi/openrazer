@@ -1,0 +1,145 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Python library &#8212; openrazer 2.4.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to openrazer’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pylib.openrazer.client.device">
+<span id="python-library"></span><h1>Python library<a class="headerlink" href="#module-pylib.openrazer.client.device" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pylib.openrazer.client.device.RazerDeviceFactory">
+<em class="property">class </em><code class="descclassname">pylib.openrazer.client.device.</code><code class="descname">RazerDeviceFactory</code><a class="reference internal" href="_modules/pylib/openrazer/client/device.html#RazerDeviceFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylib.openrazer.client.device.RazerDeviceFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple factory to return an object for a given device</p>
+<dl class="staticmethod">
+<dt id="pylib.openrazer.client.device.RazerDeviceFactory.get_device">
+<em class="property">static </em><code class="descname">get_device</code><span class="sig-paren">(</span><em>serial</em>, <em>vid_pid=None</em>, <em>daemon_dbus=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pylib/openrazer/client/device.html#RazerDeviceFactory.get_device"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pylib.openrazer.client.device.RazerDeviceFactory.get_device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factory for turning a serial into a class</p>
+<p>Device factory, will return a class fit for the device in question. The DEVICE_MAP mapping above
+can contain a device_type =&gt; DeviceClass or DeviceFactory, this allows us to specify raw device classes
+if there is only one model (like Firefly) or a factory for the keyboards (so we can differentiate between
+old blackwidows and chromas). If the device is not in the device mapping then the factory will default
+to a raw RazerDevice.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>serial</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Device serial</li>
+<li><strong>vid_pid</strong> (<em>list of int</em>) – Device VID, PID</li>
+<li><strong>daemon_dbus</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – Daemon DBus object</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">RazerDevice object (or subclass)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">RazerDevice</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">openrazer</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python library</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to openrazer’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Terry Cain.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/pylib.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

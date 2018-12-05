@@ -1,0 +1,480 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Daemon &#8212; openrazer 2.4.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="daemon">
+<h1>Daemon<a class="headerlink" href="#daemon" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Daemon<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-daemon.openrazer_daemon.daemon"></span><p>Daemon class</p>
+<p>This class is the main core of the daemon, this serves a basic dbus module to control the main bit of the daemon</p>
+<dl class="class">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon">
+<em class="property">class </em><code class="descclassname">daemon.openrazer_daemon.daemon.</code><code class="descname">RazerDaemon</code><span class="sig-paren">(</span><em>verbose=False</em>, <em>log_dir=None</em>, <em>console_log=False</em>, <em>run_dir=None</em>, <em>config_file=None</em>, <em>test_dir=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Daemon class</p>
+<p>This class sets up the main run loop which serves DBus messages. The logger is initialised
+in this module as well as finding and initialising devices.</p>
+<p>Serves the following functions via DBus
+* getDevices - Returns a list of serial numbers
+* enableTurnOffOnScreensaver - Starts/Continues the run loop on the screensaver thread
+* disableTurnOffOnScreensaver - Pauses the run loop on the screensaver thread</p>
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.enable_turn_off_on_screensaver">
+<code class="descname">enable_turn_off_on_screensaver</code><span class="sig-paren">(</span><em>enable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.enable_turn_off_on_screensaver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.enable_turn_off_on_screensaver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable the turning off of devices when the screensaver is active</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.get_off_on_screensaver">
+<code class="descname">get_off_on_screensaver</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.get_off_on_screensaver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.get_off_on_screensaver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns if turn off on screensaver</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Result</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.get_serial_list">
+<code class="descname">get_serial_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.get_serial_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.get_serial_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of devices serials</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.get_sync_effects">
+<code class="descname">get_sync_effects</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.get_sync_effects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.get_sync_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sync the effects across the devices</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if any devices sync effects</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.quit">
+<code class="descname">quit</code><span class="sig-paren">(</span><em>signum</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.quit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.quit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Quit by stopping the main loop, observer, and screensaver thread</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.read_config">
+<code class="descname">read_config</code><span class="sig-paren">(</span><em>config_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.read_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.read_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read in the config file and set the defaults</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>config_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)"><em>None</em></a>) – Config file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.resume_devices">
+<code class="descname">resume_devices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.resume_devices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.resume_devices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resume all devices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the daemon</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.stop">
+<code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for quit</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.suspend_devices">
+<code class="descname">suspend_devices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.suspend_devices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.suspend_devices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suspend all devices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.sync_effects">
+<code class="descname">sync_effects</code><span class="sig-paren">(</span><em>enabled</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.sync_effects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.sync_effects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sync the effects across the devices</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>enabled</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – True to sync effects</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.daemon.RazerDaemon.version">
+<code class="descname">version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/daemon.html#RazerDaemon.version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.daemon.RazerDaemon.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the daemon version</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Version string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-daemon.openrazer_daemon.device">
+<span id="device"></span><h2>Device<a class="headerlink" href="#module-daemon.openrazer_daemon.device" title="Permalink to this headline">¶</a></h2>
+<p>Class to hold a device and collections of them</p>
+<dl class="class">
+<dt id="daemon.openrazer_daemon.device.Device">
+<em class="property">class </em><code class="descclassname">daemon.openrazer_daemon.device.</code><code class="descname">Device</code><span class="sig-paren">(</span><em>device_id</em>, <em>device_serial</em>, <em>device_dbus_object</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#Device"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.Device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Razer Device (High level not dbus)</p>
+<dl class="attribute">
+<dt id="daemon.openrazer_daemon.device.Device.dbus">
+<code class="descname">dbus</code><a class="headerlink" href="#daemon.openrazer_daemon.device.Device.dbus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Device’s DBus object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DBus Object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">openrazer_daemon.hardware.device_base.__RazerDevice</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="daemon.openrazer_daemon.device.Device.device_id">
+<code class="descname">device_id</code><a class="headerlink" href="#daemon.openrazer_daemon.device.Device.device_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Device’s USB ID String</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Device ID</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.device.Device.notify_child">
+<code class="descname">notify_child</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#Device.notify_child"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.Device.notify_child" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive observer messages</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a>) – Tuple with first element a string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.device.Device.notify_parent">
+<code class="descname">notify_parent</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#Device.notify_parent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.Device.notify_parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify observers with msg</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a>) – Tuple with first element a string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.device.Device.register_parent">
+<code class="descname">register_parent</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#Device.register_parent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.Device.register_parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register the parent as an observer to be optionally notified (sends to other devices)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><em>object</em></a>) – Observer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="daemon.openrazer_daemon.device.Device.serial">
+<code class="descname">serial</code><a class="headerlink" href="#daemon.openrazer_daemon.device.Device.serial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Device’s Serial String</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Serial</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="daemon.openrazer_daemon.device.DeviceCollection">
+<em class="property">class </em><code class="descclassname">daemon.openrazer_daemon.device.</code><code class="descname">DeviceCollection</code><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#DeviceCollection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.DeviceCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multimap of devices</p>
+<p>Can be referenced by either ID or serial</p>
+<dl class="method">
+<dt id="daemon.openrazer_daemon.device.DeviceCollection.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>device_id</em>, <em>device_serial</em>, <em>device_dbus</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#DeviceCollection.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.DeviceCollection.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add device to collection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>device_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Device’s USB ID</li>
+<li><strong>device_serial</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Device’s Serial String</li>
+<li><strong>device_dbus</strong> (<em>openrazer_daemon.hardware.device_base.__RazerDevice</em>) – Device’s DBus object</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="daemon.openrazer_daemon.device.DeviceCollection.devices">
+<code class="descname">devices</code><a class="headerlink" href="#daemon.openrazer_daemon.device.DeviceCollection.devices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get device list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of devices</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of Device</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.device.DeviceCollection.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#DeviceCollection.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.DeviceCollection.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get device object by ID or serial</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ID or serial</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Device object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#daemon.openrazer_daemon.device.Device" title="daemon.openrazer_daemon.device.Device">Device</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IndexError" title="(in Python v3.7)"><strong>IndexError</strong></a> – If item not found</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.device.DeviceCollection.id_items">
+<code class="descname">id_items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#DeviceCollection.id_items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.DeviceCollection.id_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get (id, Device) iterator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Items method from the id map</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of tuple of str, <a class="reference internal" href="#daemon.openrazer_daemon.device.Device" title="daemon.openrazer_daemon.device.Device">Device</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.device.DeviceCollection.notify">
+<code class="descname">notify</code><span class="sig-paren">(</span><em>active_child</em>, <em>msg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#DeviceCollection.notify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.DeviceCollection.notify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send messages between children</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>active_child</strong> (<a class="reference internal" href="#daemon.openrazer_daemon.device.Device" title="daemon.openrazer_daemon.device.Device"><em>Device</em></a>) – Child sending the message</li>
+<li><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a>) – Messgae</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.device.DeviceCollection.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#DeviceCollection.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.DeviceCollection.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove object being referenced to by ident from collection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ID or serial</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.device.DeviceCollection.serial_items">
+<code class="descname">serial_items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#DeviceCollection.serial_items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.DeviceCollection.serial_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get (serial, Device) iterator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Items method from the serial map</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of tuple of str, <a class="reference internal" href="#daemon.openrazer_daemon.device.Device" title="daemon.openrazer_daemon.device.Device">Device</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="daemon.openrazer_daemon.device.DeviceCollection.serials">
+<code class="descname">serials</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/daemon/openrazer_daemon/device.html#DeviceCollection.serials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#daemon.openrazer_daemon.device.DeviceCollection.serials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of serials</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Serial list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">openrazer</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Terry Cain.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/daemon.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
