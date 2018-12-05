@@ -1,0 +1,353 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>daemon.openrazer_daemon.device &#8212; openrazer 2.4.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for daemon.openrazer_daemon.device</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Class to hold a device and collections of them</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="Device"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.Device">[docs]</a><span class="k">class</span> <span class="nc">Device</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Razer Device (High level not dbus)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_id</span><span class="p">,</span> <span class="n">device_serial</span><span class="p">,</span> <span class="n">device_dbus_object</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="n">device_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span> <span class="o">=</span> <span class="n">device_serial</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dbus</span> <span class="o">=</span> <span class="n">device_dbus_object</span>
+        <span class="c1"># Register as parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dbus</span><span class="o">.</span><span class="n">register_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">device_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Device&#39;s USB ID String</span>
+
+<span class="sd">        :return: Device ID</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Device&#39;s Serial String</span>
+
+<span class="sd">        :return: Serial</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dbus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Device&#39;s DBus object</span>
+
+<span class="sd">        :return: DBus Object</span>
+<span class="sd">        :rtype: openrazer_daemon.hardware.device_base.__RazerDevice</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dbus</span>
+
+<div class="viewcode-block" id="Device.register_parent"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.Device.register_parent">[docs]</a>    <span class="k">def</span> <span class="nf">register_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register the parent as an observer to be optionally notified (sends to other devices)</span>
+
+<span class="sd">        :param parent: Observer</span>
+<span class="sd">        :type parent: object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span> <span class="o">=</span> <span class="n">parent</span></div>
+
+<div class="viewcode-block" id="Device.notify_parent"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.Device.notify_parent">[docs]</a>    <span class="k">def</span> <span class="nf">notify_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Notify observers with msg</span>
+
+<span class="sd">        :param msg: Tuple with first element a string</span>
+<span class="sd">        :type msg: tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Device.notify_child"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.Device.notify_child">[docs]</a>    <span class="k">def</span> <span class="nf">notify_child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Receive observer messages</span>
+
+<span class="sd">        :param msg: Tuple with first element a string</span>
+<span class="sd">        :type msg: tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Message from DBus object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dbus</span><span class="o">.</span><span class="n">notify</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="DeviceCollection"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.DeviceCollection">[docs]</a><span class="k">class</span> <span class="nc">DeviceCollection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Multimap of devices</span>
+
+<span class="sd">    Can be referenced by either ID or serial</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_serial_map</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="DeviceCollection.add"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.DeviceCollection.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_id</span><span class="p">,</span> <span class="n">device_serial</span><span class="p">,</span> <span class="n">device_dbus</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add device to collection</span>
+
+<span class="sd">        :param device_id: Device&#39;s USB ID</span>
+<span class="sd">        :type device_id: str</span>
+
+<span class="sd">        :param device_serial: Device&#39;s Serial String</span>
+<span class="sd">        :type device_serial: str</span>
+
+<span class="sd">        :param device_dbus: Device&#39;s DBus object</span>
+<span class="sd">        :type device_dbus: openrazer_daemon.hardware.device_base.__RazerDevice</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">device_object</span> <span class="o">=</span> <span class="n">Device</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">device_serial</span><span class="p">,</span> <span class="n">device_dbus</span><span class="p">)</span>
+        <span class="n">device_object</span><span class="o">.</span><span class="n">register_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="p">[</span><span class="n">device_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">device_object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_serial_map</span><span class="p">[</span><span class="n">device_serial</span><span class="p">]</span> <span class="o">=</span> <span class="n">device_object</span></div>
+
+<div class="viewcode-block" id="DeviceCollection.remove"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.DeviceCollection.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove object being referenced to by ident from collection</span>
+
+<span class="sd">        :param key: ID or serial</span>
+<span class="sd">        :type key: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DeviceCollection.get"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.DeviceCollection.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get device object by ID or serial</span>
+
+<span class="sd">        :param item: ID or serial</span>
+<span class="sd">        :type item: str</span>
+
+<span class="sd">        :return: Device object</span>
+<span class="sd">        :rtype: Device</span>
+
+<span class="sd">        :raises IndexError: If item not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DeviceCollection.id_items"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.DeviceCollection.id_items">[docs]</a>    <span class="k">def</span> <span class="nf">id_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get (id, Device) iterator</span>
+
+<span class="sd">        :return: Items method from the id map</span>
+<span class="sd">        :rtype: list of tuple of str, Device</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="o">.</span><span class="n">items</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DeviceCollection.serial_items"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.DeviceCollection.serial_items">[docs]</a>    <span class="k">def</span> <span class="nf">serial_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get (serial, Device) iterator</span>
+
+<span class="sd">        :return: Items method from the serial map</span>
+<span class="sd">        :rtype: list of tuple of str, Device</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial_map</span><span class="o">.</span><span class="n">items</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DeviceCollection.serials"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.DeviceCollection.serials">[docs]</a>    <span class="k">def</span> <span class="nf">serials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get list of serials</span>
+
+<span class="sd">        :return: Serial list</span>
+<span class="sd">        :rtype: list of str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_serial_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get length of collection</span>
+
+<span class="sd">        :return: Length</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get device object by ID or serial</span>
+
+<span class="sd">        :param item: ID or serial</span>
+<span class="sd">        :type item: str</span>
+
+<span class="sd">        :return: Device object</span>
+<span class="sd">        :rtype: Device</span>
+
+<span class="sd">        :raises IndexError: If item not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial_map</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial_map</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove object being referenced to by ident from collection</span>
+
+<span class="sd">        :param key: ID or serial</span>
+<span class="sd">        :type key: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="p">:</span>
+            <span class="n">serial</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">serial</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_serial_map</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">serial</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial_map</span><span class="p">:</span>
+            <span class="n">device_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial_map</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">device_id</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_serial_map</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If ID or serial exists in datastructure</span>
+
+<span class="sd">        :param item: ID or serial</span>
+<span class="sd">        :type item: str</span>
+
+<span class="sd">        :return: True if ID or serial exists</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span> <span class="ow">or</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serial_map</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get devices</span>
+
+<span class="sd">        :return: Devices</span>
+<span class="sd">        :rtype: list of Device</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">devices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get device list</span>
+
+<span class="sd">        :return: List of devices</span>
+<span class="sd">        :rtype: list of Device</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+<div class="viewcode-block" id="DeviceCollection.notify"><a class="viewcode-back" href="../../../daemon.html#daemon.openrazer_daemon.device.DeviceCollection.notify">[docs]</a>    <span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">active_child</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send messages between children</span>
+
+<span class="sd">        :param active_child: Child sending the message</span>
+<span class="sd">        :type active_child: Device</span>
+
+<span class="sd">        :param msg: Messgae</span>
+<span class="sd">        :type msg: tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_map</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">child</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">active_child</span><span class="p">:</span>
+                <span class="n">child</span><span class="o">.</span><span class="n">notify_child</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">openrazer</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intro.html">Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../daemon.html">Daemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../pylib.html">Python library</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Terry Cain.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
